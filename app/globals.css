@@ -1,1 +1,158 @@
 @import "tailwindcss";
+
+:root {
+  --bg:       #F7F3ED;
+  --bg-alt:   #EDE7DC;
+  --bg-card:  #FFFFFF;
+  --text:     #1E1812;
+  --muted:    #7A6E62;
+  --gold:     #B8935A;
+  --gold-d:   #8B6830;
+  --gold-l:   #D4A96A;
+  --border:   rgba(30,24,18,0.1);
+}
+
+/* ── Smooth scroll ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Premium background — warm linen texture + edge vignette ── */
+body {
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px, transparent 2px,
+      rgba(184, 147, 90, 0.018) 2px, rgba(184, 147, 90, 0.018) 3px
+    );
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse 130% 90% at 50% 40%,
+    transparent 30%,
+    rgba(30, 24, 18, 0.065) 100%
+  );
+}
+
+/* ── Button shimmer sweep ── */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -80%;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+.shimmer:hover::after {
+  animation: shimmer-sweep 0.55s ease forwards;
+}
+
+@keyframes shimmer-sweep {
+  from { left: -80%; }
+  to   { left: 130%; }
+}
+
+/* ── Gold inset frame on images ── */
+.hover-frame {
+  position: relative;
+}
+.hover-frame::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(184, 147, 90, 0);
+  transition: inset 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+.hover-frame:hover::after {
+  inset: 7px;
+  border-color: rgba(184, 147, 90, 0.5);
+}
+
+/* ── Global focus rings (accessibility) ── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ── Reduced motion: disable decorative animations ── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-d);
+}
+
+/* ── Experience number glow on hover ── */
+.exp-item:hover .exp-num {
+  text-shadow: 0 0 16px rgba(184, 147, 90, 0.5);
+  letter-spacing: 0.04em;
+}
+.exp-num {
+  transition: text-shadow 0.4s ease, letter-spacing 0.4s ease;
+}
+
+/* ── Film grain overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ── Marquee animation ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: inline-block;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}

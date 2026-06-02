@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${cormorant.variable} ${jost.variable} bg-[#09080A] text-[#EDE0C8]`}>
+      <body className={`${cormorant.variable} ${jost.variable} bg-[#F7F3ED] text-[#1E1812]`}>
         <Navbar />
         {children}
       </body>
