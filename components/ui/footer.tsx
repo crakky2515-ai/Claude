@@ -71,7 +71,7 @@ export default function Footer() {
           <div>
             <p className="text-[0.58rem] tracking-[0.22em] uppercase text-[#D4A96A] mb-5">Experiences</p>
             <ul className="flex flex-col gap-3">
-              {["Thai Wellness & Spa", "Canal Journeys", "Farm-to-Table Dining", "Muay Thai & Mindfulness", "Temple Excursions"].map(exp => (
+              {["Riverside Relaxation", "Morning Serenity", "Family Getaway", "Local Charm"].map(exp => (
                 <li key={exp}>
                   <span className="text-xs text-white/50 tracking-wide">{exp}</span>
                 </li>
@@ -85,7 +85,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 text-xs text-white/50">
               <li>
                 <p className="text-[0.58rem] tracking-widest uppercase text-white/30 mb-0.5">Phone</p>
-                <a href="tel:0812575225" className="hover:text-white transition-colors">081-257-5225</a>
+                <a href="tel:0809944891" className="hover:text-white transition-colors">080-994-4891</a>
               </li>
               <li>
                 <p className="text-[0.58rem] tracking-widest uppercase text-white/30 mb-0.5">Email</p>
