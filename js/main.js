@@ -115,13 +115,74 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   }
 });
 
+// PromptPay QR payload generator
+function generatePromptPayPayload(phone, amount) {
+  function tag(id, val) {
+    return id + val.length.toString().padStart(2, '0') + val;
+  }
+  const cleaned = phone.replace(/\D/g, '');
+  const ppId = '0066' + cleaned.replace(/^0/, '');
+  const merchantInfo = tag('00', 'A000000677010111') + tag('01', ppId);
+  const amountStr = amount.toFixed(2);
+  let payload = tag('00', '01') + tag('01', '12') + tag('29', merchantInfo) + tag('53', '764') + tag('54', amountStr) + tag('58', 'TH') + '6304';
+  let crc = 0xFFFF;
+  for (let i = 0; i < payload.length; i++) {
+    crc ^= payload.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) {
+      crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+    }
+  }
+  return payload + (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+}
+
+function showDepositModal(amount, stayType) {
+  const overlay = document.getElementById('depositOverlay');
+  if (!overlay) return;
+  document.getElementById('depositAmount').textContent = '฿' + amount;
+  document.getElementById('depositBankAmount').textContent = '฿' + amount;
+  document.getElementById('depositTypeLabel').textContent =
+    stayType === 'dayuse' ? 'ชั่วคราว — Day Use Deposit' : 'ค้างคืน — Overnight Deposit';
+
+  const payload = generatePromptPayPayload('0868468786', amount);
+  if (window.QRCode) {
+    QRCode.toCanvas(document.getElementById('depositQR'), payload, {
+      width: 180, margin: 1,
+      color: { dark: '#000000', light: '#ffffff' }
+    });
+  }
+
+  const label = stayType === 'dayuse' ? 'ชั่วคราว (Day Use)' : 'ค้างคืน (Overnight)';
+  const msg = encodeURIComponent(`สวัสดีครับ/ค่ะ ขอแจ้งชำระมัดจำ ฿${amount} (${label}) กรุณาตรวจสอบสลิปด้วยนะครับ 🙏`);
+  document.getElementById('depositLineBtn').href = `https://line.me/R/oaMessage/@banrimklong/?text=${msg}`;
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// Deposit modal close
+const depositOverlay = document.getElementById('depositOverlay');
+const depositCloseBtn = document.getElementById('depositClose');
+function closeDepositModal() {
+  if (depositOverlay) {
+    depositOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+if (depositCloseBtn) depositCloseBtn.addEventListener('click', closeDepositModal);
+if (depositOverlay) {
+  depositOverlay.addEventListener('click', (e) => {
+    if (e.target === depositOverlay) closeDepositModal();
+  });
+}
+
 // Form submission via Formspree
 const form = document.querySelector('.booking-form');
 if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending...';
+    const btnSpan = btn.querySelector('span') || btn;
+    btnSpan.textContent = 'กำลังส่ง...';
     btn.disabled = true;
     try {
       const res = await fetch('https://formspree.io/f/xbdbnanj', {
@@ -130,16 +191,18 @@ if (form) {
         body: new FormData(form)
       });
       if (res.ok) {
-        btn.textContent = '✓ Request Sent';
+        const stayType = form.querySelector('#staytype')?.value || 'overnight';
+        const deposit = stayType === 'dayuse' ? 100 : 200;
+        btnSpan.textContent = '✓ ส่งแล้ว';
         btn.style.background = '#4a7c59';
-        btn.style.borderColor = '#4a7c59';
         form.reset();
+        setTimeout(() => showDepositModal(deposit, stayType), 600);
       } else {
-        btn.textContent = 'Failed — Please Try Again';
+        btnSpan.textContent = 'เกิดข้อผิดพลาด — ลองใหม่';
         btn.disabled = false;
       }
     } catch {
-      btn.textContent = 'Failed — Please Try Again';
+      btnSpan.textContent = 'เกิดข้อผิดพลาด — ลองใหม่';
       btn.disabled = false;
     }
   });

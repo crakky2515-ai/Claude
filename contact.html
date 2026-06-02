@@ -171,14 +171,21 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="staytype">ประเภทการพัก / Stay Type</label>
+              <select id="staytype" name="staytype">
+                <option value="overnight">ค้างคืน (Overnight) — มัดจำ ฿200</option>
+                <option value="dayuse">ชั่วคราว (Day Use) — มัดจำ ฿100</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label for="occasion">Special Occasion or Request</label>
               <textarea id="occasion" name="occasion" placeholder="Anniversary, honeymoon, dietary requirements, airport transfer, or any other request..."></textarea>
             </div>
             <button type="submit" class="btn-primary" style="width:100%;padding:1.1rem;cursor:pointer;font-family:'Jost',sans-serif;border:none;font-size:0.72rem;letter-spacing:0.2em;">
-              <span>Send Reservation Request</span>
+              <span>ยืนยันและจ่ายมัดจำ</span>
             </button>
             <p style="font-size:0.72rem;color:var(--cream-dim);margin-top:1rem;text-align:center;line-height:1.7;">
-              We will confirm availability and respond within 2 hours.<br>No payment required at this stage.
+              ค้างคืน มัดจำ ฿200 · ชั่วคราว มัดจำ ฿100<br>ชำระผ่าน PromptPay หรือโอนธนาคาร
             </p>
           </form>
         </div>
@@ -291,6 +298,62 @@
   </div>
 </footer>
 
+<!-- DEPOSIT MODAL -->
+<div class="deposit-overlay" id="depositOverlay" role="dialog" aria-modal="true" aria-labelledby="depositTitle">
+  <div class="deposit-card">
+    <div class="deposit-gold-bar"></div>
+    <button class="deposit-close-btn" id="depositClose" aria-label="ปิด">✕</button>
+
+    <span class="eyebrow">ขั้นตอนที่ 2</span>
+    <h3 id="depositTitle" style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;margin-top:0.5rem;">มัดจำการจอง</h3>
+    <p style="font-size:0.78rem;color:var(--cream-dim);margin-top:0.3rem;line-height:1.6;">กรุณาชำระค่ามัดจำเพื่อยืนยันการจองของท่าน</p>
+
+    <div class="deposit-amount-display" id="depositAmount">฿200</div>
+    <div style="font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream-dim);" id="depositTypeLabel">ค้างคืน — Overnight Deposit</div>
+
+    <div class="deposit-qr-container">
+      <div class="deposit-qr-wrap">
+        <canvas id="depositQR"></canvas>
+      </div>
+      <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-top:0.8rem;">PromptPay</div>
+      <div style="font-size:0.85rem;color:var(--cream-dim);margin-top:0.2rem;letter-spacing:0.05em;">086-846-8786</div>
+    </div>
+
+    <div class="deposit-divider">หรือโอนผ่านธนาคาร</div>
+
+    <!-- ⚠️ แก้ไขข้อมูลธนาคารด้านล่างนี้ -->
+    <div class="deposit-bank">
+      <div class="deposit-bank-row">
+        <span class="deposit-bank-label">ธนาคาร</span>
+        <span class="deposit-bank-value">กสิกรไทย (KBank)</span>
+      </div>
+      <div class="deposit-bank-row">
+        <span class="deposit-bank-label">ชื่อบัญชี</span>
+        <span class="deposit-bank-value">[ชื่อบัญชี]</span>
+      </div>
+      <div class="deposit-bank-row">
+        <span class="deposit-bank-label">เลขที่บัญชี</span>
+        <span class="deposit-bank-value">[XXX-X-XXXXX-X]</span>
+      </div>
+      <div class="deposit-bank-row">
+        <span class="deposit-bank-label">ยอดโอน</span>
+        <span class="deposit-bank-value" id="depositBankAmount" style="color:var(--gold-light);font-size:1rem;font-family:'Cormorant Garamond',serif;">฿200</span>
+      </div>
+    </div>
+
+    <a href="#" class="btn-line" id="depositLineBtn" target="_blank" rel="noopener">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      แจ้งโอนเงินทาง LINE
+    </a>
+
+    <p style="font-size:0.68rem;color:var(--cream-dim);margin-top:1rem;text-align:center;line-height:1.9;">
+      กรุณาส่งสลิปมาที่ LINE <strong style="color:var(--gold);">@banrimklong</strong><br>
+      ทีมงานจะยืนยันการจองภายใน 2 ชั่วโมง
+    </p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
   flatpickr("#checkin", {

@@ -911,6 +911,140 @@ footer {
 .contact-info {
   padding-top: 1rem;
 }
+
+/* DEPOSIT MODAL */
+.deposit-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9,8,10,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+.deposit-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.deposit-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  max-width: 400px;
+  width: 100%;
+  padding: 2.5rem 2rem 2rem;
+  position: relative;
+  transform: translateY(24px) scale(0.98);
+  transition: transform 0.5s var(--ease-out);
+  max-height: 92vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dark) transparent;
+}
+.deposit-overlay.open .deposit-card {
+  transform: translateY(0) scale(1);
+}
+.deposit-gold-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.deposit-amount-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--gold-light);
+  line-height: 1;
+  margin: 1.5rem 0 0.4rem;
+  letter-spacing: -0.02em;
+}
+.deposit-qr-container {
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+}
+.deposit-qr-wrap {
+  display: inline-block;
+  background: #ffffff;
+  padding: 12px;
+  line-height: 0;
+}
+.deposit-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+.deposit-divider::before,
+.deposit-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.deposit-bank {
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.deposit-bank-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  gap: 1rem;
+}
+.deposit-bank-row:last-child { border-bottom: none; }
+.deposit-bank-label { color: var(--cream-dim); white-space: nowrap; }
+.deposit-bank-value { color: var(--cream); font-weight: 400; text-align: right; }
+.btn-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: #06C755;
+  color: #fff;
+  border: none;
+  padding: 0.95rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+}
+.btn-line:hover { background: #05b34e; color: #fff; }
+.deposit-close-btn {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--cream-dim);
+  width: 30px; height: 30px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+  line-height: 1;
+}
+.deposit-close-btn:hover { border-color: var(--gold); color: var(--cream); }
 .contact-info-item {
   display: flex;
   gap: 1.5rem;
