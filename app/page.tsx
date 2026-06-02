@@ -94,9 +94,9 @@ export default function Home() {
             <FadeIn delay={0.3}>
               <div className="hidden md:grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-black/10">
                 {[
-                  { n: 16,  suffix: "",  label: "Private Suites" },
-                  { n: 5,   suffix: "★", label: "Rating" },
-                  { n: 3,   suffix: "",  label: "Restaurants" },
+                  { n: 10,  suffix: "+", label: "ปีที่ให้บริการ" },
+                  { n: 2,   suffix: " ชม.", label: "จากกรุงเทพฯ" },
+                  { n: 500, suffix: "฿", label: "ราคาเริ่มต้น / คืน" },
                 ].map(({ n, suffix, label }) => (
                   <div key={label} className="stat-hover group cursor-default">
                     <div className="text-[2.4rem] text-[#B8935A] leading-none transition-transform duration-300 group-hover:scale-110 group-hover:translate-y-[-2px]" style={{ fontFamily: "var(--font-cormorant), serif" }}>
