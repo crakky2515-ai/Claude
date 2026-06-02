@@ -2,6 +2,9 @@ import SmoothScrollHero from "@/components/ui/smooth-scroll-hero";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Marquee } from "@/components/ui/marquee";
 import Footer from "@/components/ui/footer";
+import { TiltImage } from "@/components/ui/tilt-image";
+import { SpotlightSection } from "@/components/ui/spotlight-section";
+import { AboutInteractive, Counter } from "@/components/ui/about-interactive";
 import Link from "next/link";
 
 export default function Home() {
@@ -46,11 +49,11 @@ export default function Home() {
 
       {/* ── ABOUT ── */}
       <section className="py-20 md:py-32 px-6 md:px-16 max-w-screen-xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <AboutInteractive>
+          {/* LEFT — image */}
           <FadeIn direction="left">
-            <div className="relative hover-frame">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/entrance.jpg" alt="Banrimklong Resort entrance" loading="lazy" className="w-full aspect-[4/5] object-cover" />
+            <div className="relative hover-frame about-float">
+              <TiltImage src="/entrance.jpg" alt="Banrimklong Resort entrance" className="w-full aspect-[4/5] object-cover" />
               <div className="md:hidden grid grid-cols-3 mt-4 border border-black/10">
                 {[["16","Suites"],["5★","Rating"],["3","Dining"]].map(([n,l]) => (
                   <div key={l} className="text-center py-4 border-r border-black/10 last:border-r-0">
@@ -61,6 +64,8 @@ export default function Home() {
               </div>
             </div>
           </FadeIn>
+
+          {/* RIGHT — text */}
           <div>
             <FadeIn delay={0.1}>
               <p className="text-xs tracking-[0.25em] uppercase text-[#B8935A]">Our Story</p>
@@ -88,16 +93,22 @@ export default function Home() {
             </FadeIn>
             <FadeIn delay={0.3}>
               <div className="hidden md:grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-black/10">
-                {[["16","Private Suites"],["5★","Rating"],["3","Restaurants"]].map(([n,l]) => (
-                  <div key={l}>
-                    <div className="text-[2.4rem] text-[#B8935A] leading-none" style={{ fontFamily: "var(--font-cormorant), serif" }}>{n}</div>
-                    <div className="text-[0.62rem] tracking-[0.15em] uppercase text-[#7A6E62] mt-1">{l}</div>
+                {[
+                  { n: 16,  suffix: "",  label: "Private Suites" },
+                  { n: 5,   suffix: "★", label: "Rating" },
+                  { n: 3,   suffix: "",  label: "Restaurants" },
+                ].map(({ n, suffix, label }) => (
+                  <div key={label} className="stat-hover group cursor-default">
+                    <div className="text-[2.4rem] text-[#B8935A] leading-none transition-transform duration-300 group-hover:scale-110 group-hover:translate-y-[-2px]" style={{ fontFamily: "var(--font-cormorant), serif" }}>
+                      <Counter target={n} />{suffix}
+                    </div>
+                    <div className="text-[0.62rem] tracking-[0.15em] uppercase text-[#7A6E62] mt-1">{label}</div>
                   </div>
                 ))}
               </div>
             </FadeIn>
           </div>
-        </div>
+        </AboutInteractive>
       </section>
 
       {/* ── ROOMS PREVIEW ── */}
@@ -116,7 +127,7 @@ export default function Home() {
             </Link>
           </FadeIn>
         </div>
-        <div className="flex flex-col md:grid md:grid-cols-2 gap-px bg-black/8">
+        <SpotlightSection className="flex flex-col md:grid md:grid-cols-2 gap-px bg-black/8">
           {[
             { type:"ค้างคืน",  name:"ห้องพักรายคืน",    price:"฿500", img:"/room1.jpg",    feats:["พักได้ทั้งคืน","เช็คอิน 14:00","เช็คเอาท์ 12:00"] },
             { type:"ชั่วคราว", name:"ห้องพักรายชั่วโมง", price:"฿250", img:"/room2.jpg",    feats:["3 ชั่วโมง","พร้อมใช้ทันที"] },
@@ -131,7 +142,7 @@ export default function Home() {
                 <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
                   <p className="text-[0.6rem] tracking-[0.2em] uppercase text-[#D4A96A] mb-1">{room.type}</p>
                   <p className="text-white mb-1 text-[1.55rem]" style={{ fontFamily: "var(--font-cormorant), serif" }}>{room.name}</p>
-                  <p className="text-xs text-white/70"><span className="text-[#D4A96A] text-sm">{room.price}</span></p>
+                  <p className="text-xs text-white/70"><span className="text-[#D4A96A] text-sm price-pulse">{room.price}</span></p>
                   <div className="flex gap-3 mt-2">
                     {room.feats.map(f => <span key={f} className="text-[0.58rem] tracking-widest uppercase text-white/60">— {f}</span>)}
                   </div>
@@ -139,7 +150,7 @@ export default function Home() {
               </Link>
             </FadeIn>
           ))}
-        </div>
+        </SpotlightSection>
       </section>
 
       {/* ── EXPERIENCE ── */}
@@ -178,7 +189,7 @@ export default function Home() {
       </section>
 
       {/* ── GALLERY ── */}
-      <section className="py-20 md:py-28 px-6 md:px-16 max-w-screen-xl mx-auto">
+      <SpotlightSection className="py-20 md:py-28 px-6 md:px-16 max-w-screen-xl mx-auto" radius={500} color="rgba(201,163,92,0.07)">
         <FadeIn className="text-center mb-10 md:mb-14">
           <p className="text-xs tracking-[0.25em] uppercase text-[#B8935A]">Gallery</p>
           <div className="w-10 h-px bg-[#B8935A] my-4 mx-auto" />
@@ -199,14 +210,16 @@ export default function Home() {
             </FadeIn>
           ))}
         </div>
-      </section>
+      </SpotlightSection>
 
       {/* ── TESTIMONIAL ── */}
       <section className="py-20 md:py-24 px-6 md:px-16 bg-[#EDE7DC] text-center">
         <FadeIn>
-          <div className="text-[#B8935A] tracking-[0.3em] text-sm mb-6">★ ★ ★ ★ ★</div>
+          <div className="star-sparkle text-[#B8935A] tracking-[0.3em] text-sm mb-6">
+            <span>★</span><span> </span><span>★</span><span> </span><span>★</span><span> </span><span>★</span><span> </span><span>★</span>
+          </div>
           <blockquote
-            className="text-[clamp(1.4rem,3.5vw,2.6rem)] text-[#1E1812] leading-snug max-w-3xl mx-auto mb-6 italic"
+            className="quote-glow text-[clamp(1.4rem,3.5vw,2.6rem)] text-[#1E1812] leading-snug max-w-3xl mx-auto mb-6 italic"
             style={{ fontFamily: "var(--font-cormorant), serif" }}
           >
             "The Banrimklong redefined what a hotel stay can be. The silence, the light, the extraordinary care — I left a different person."

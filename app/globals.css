@@ -120,13 +120,79 @@ body::before {
   background: var(--gold-d);
 }
 
-/* ── Experience number glow on hover ── */
+/* ── About: floating image animation ── */
+@keyframes about-float {
+  0%, 100% { transform: translateY(0px);   }
+  50%       { transform: translateY(-8px);  }
+}
+.about-float {
+  animation: about-float 5s ease-in-out infinite;
+}
+
+/* ── Experience: gold underline grows on hover ── */
+.exp-item {
+  position: relative;
+}
+.exp-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: linear-gradient(90deg, #B8935A, transparent);
+  transition: width 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.exp-item:hover::after { width: 100%; }
 .exp-item:hover .exp-num {
-  text-shadow: 0 0 16px rgba(184, 147, 90, 0.5);
+  text-shadow: 0 0 16px rgba(184, 147, 90, 0.55);
   letter-spacing: 0.04em;
 }
 .exp-num {
   transition: text-shadow 0.4s ease, letter-spacing 0.4s ease;
+}
+
+/* ── Testimonial: stars sparkle ── */
+@keyframes star-sparkle {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.5; transform: scale(1.35); }
+}
+.star-sparkle > span {
+  display: inline-block;
+  animation: star-sparkle 2.4s ease-in-out infinite;
+}
+.star-sparkle > span:nth-child(1) { animation-delay: 0s;    }
+.star-sparkle > span:nth-child(2) { animation-delay: 0.3s;  }
+.star-sparkle > span:nth-child(3) { animation-delay: 0.6s;  }
+.star-sparkle > span:nth-child(4) { animation-delay: 0.9s;  }
+.star-sparkle > span:nth-child(5) { animation-delay: 1.2s;  }
+
+/* ── Testimonial: quote hover glow ── */
+.quote-glow {
+  transition: text-shadow 0.4s ease;
+}
+.quote-glow:hover {
+  text-shadow: 0 2px 32px rgba(184,147,90,0.18);
+}
+
+/* ── Rooms preview: price pulse ── */
+@keyframes price-pulse {
+  0%   { transform: scale(1);    opacity: 0.85; }
+  50%  { transform: scale(1.04); opacity: 1;    }
+  100% { transform: scale(1);    opacity: 0.85; }
+}
+.price-pulse {
+  animation: price-pulse 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* ── Rooms detail: animated background gradient ── */
+@keyframes room-bg-drift {
+  0%   { background-position: 0% 0%;   }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%;   }
+}
+.room-detail-bg {
+  background-size: 200% 200%;
+  animation: room-bg-drift 8s ease-in-out infinite;
 }
 
 /* ── Film grain overlay ── */
