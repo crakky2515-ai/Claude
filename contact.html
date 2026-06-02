@@ -6,6 +6,7 @@
   <title>Reservations &amp; Contact — Banrimklong Resort · Chachoengsao, Thailand</title>
   <meta name="description" content="Reserve your stay or enquire about private events at Banrimklong Resort, Chachoengsao, Thailand.">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
@@ -139,11 +140,11 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="checkin">Check-in Date</label>
-                <input type="date" id="checkin" name="checkin" required>
+                <input type="text" id="checkin" name="checkin" placeholder="วันเช็คอิน" required readonly>
               </div>
               <div class="form-group">
                 <label for="checkout">Check-out Date</label>
-                <input type="date" id="checkout" name="checkout" required>
+                <input type="text" id="checkout" name="checkout" placeholder="วันเช็คเอาท์" required readonly>
               </div>
             </div>
             <div class="form-row">
@@ -290,6 +291,24 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  flatpickr("#checkin", {
+    minDate: "today",
+    dateFormat: "d/m/Y",
+    disableMobile: false,
+    onChange: function(selectedDates) {
+      if (selectedDates[0]) {
+        checkoutPicker.set("minDate", selectedDates[0]);
+      }
+    }
+  });
+  const checkoutPicker = flatpickr("#checkout", {
+    minDate: "today",
+    dateFormat: "d/m/Y",
+    disableMobile: false
+  });
+</script>
 <script src="js/main.js"></script>
 </body>
 </html>

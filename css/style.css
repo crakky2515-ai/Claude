@@ -906,12 +906,6 @@ footer {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-.form-group input[type="date"] {
-  appearance: auto;
-  -webkit-appearance: auto;
-  color-scheme: dark;
-  cursor: pointer;
-}
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: var(--cream-dim); opacity: 0.5; }
 .contact-info {
