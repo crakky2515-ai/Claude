@@ -13,7 +13,7 @@ export default function ContactPage() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("https://formspree.io/f/xbdbnanj", {
+      const res = await fetch("https://formspree.io/f/meedydrq", {
         method: "POST",
         body: new FormData(e.currentTarget),
         headers: { Accept: "application/json" },
