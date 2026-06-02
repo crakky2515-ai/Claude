@@ -53,7 +53,7 @@ export default function Home() {
           {/* LEFT — image */}
           <FadeIn direction="left">
             <div className="relative hover-frame about-float">
-              <TiltImage src="/entrance.jpg" alt="Banrimklong Resort entrance" className="w-full aspect-[4/5] object-cover" />
+              <TiltImage src="/resort.jpg" alt="บ้านริมคลอง รีสอร์ท" className="w-full aspect-[4/5] object-cover" />
               <div className="md:hidden grid grid-cols-3 mt-4 border border-black/10">
                 {[["16","Suites"],["5★","Rating"],["3","Dining"]].map(([n,l]) => (
                   <div key={l} className="text-center py-4 border-r border-black/10 last:border-r-0">
@@ -199,10 +199,10 @@ export default function Home() {
         </FadeIn>
         <div className="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-1 md:h-[560px]">
           {[
-            { src:"/nostar2.jpg", alt:"บ้านริมคลอง รีสอร์ท",  cls:"col-span-2 md:col-span-2 md:row-span-2", delay:0   },
-            { src:"/room1.jpg",  alt:"ห้องพักรายคืน",     cls:"",                                       delay:0.1 },
-            { src:"/nostar1.jpg",alt:"ทางเข้ารีสอร์ท",    cls:"",                                       delay:0.15},
-            { src:"/entrance.jpg",alt:"บรรยากาศโดยรอบ",   cls:"col-span-2",                             delay:0.2 },
+            { src:"/resort2.jpg",  alt:"บ้านริมคลอง รีสอร์ท บรรยากาศ",  cls:"col-span-2 md:col-span-2 md:row-span-2", delay:0   },
+            { src:"/room1.jpg",   alt:"ห้องพักรายคืน",              cls:"",                                       delay:0.1 },
+            { src:"/bathroom2.jpg",alt:"ห้องน้ำ",                    cls:"",                                       delay:0.15},
+            { src:"/flower.jpg",  alt:"บรรยากาศธรรมชาติ",           cls:"col-span-2",                             delay:0.2 },
           ].map(({ src, alt, cls, delay }) => (
             <FadeIn key={src} delay={delay} className={`overflow-hidden hover-frame ${cls}`}>
               {/* eslint-disable-next-line @next/next/no-img-element */}

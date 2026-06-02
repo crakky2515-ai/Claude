@@ -119,11 +119,11 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field label="ชื่อ" id="fname" name="fname" placeholder="สมชาย" />
                   <Field label="นามสกุล" id="lname" name="lname" placeholder="ใจดี" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field label="Email" id="email" name="email" type="email" placeholder="you@email.com" />
                   <Field label="เบอร์โทร" id="phone" name="phone" placeholder="081-000-0000" inputMode="tel" />
                 </div>
@@ -151,11 +151,11 @@ export default function ContactPage() {
                   <p className="text-[0.62rem] text-[#7A6E62] mt-1.5">เราจะส่ง QR มัดจำและยืนยันการจองทาง LINE ของท่าน</p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Field label="เช็คอิน" id="checkin" name="checkin" type="date" />
                   <Field label="เช็คเอาท์" id="checkout" name="checkout" type="date" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">จำนวนผู้เข้าพัก</label>
                     <select name="guests" className="w-full bg-transparent border border-[rgba(184,147,90,0.25)] px-4 py-3 text-[#1E1812] text-sm outline-none focus:border-[#C9A35C] transition-colors">

@@ -57,7 +57,7 @@ export default function RoomsPage() {
       {/* Check-in strip */}
       <div className="bg-[#EDE7DC] border-b border-black/10 py-5 px-8 md:px-16">
         <div className="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div className="flex gap-8 flex-wrap text-sm">
+          <div className="flex gap-6 overflow-x-auto pb-1 text-sm scrollbar-hide" style={{ scrollbarWidth: "none" }}>
             {[["เช็คอิน","ตั้งแต่ 14:00"],["เช็คเอาท์","ก่อน 12:00"],["ห้องชั่วคราว","3 ชั่วโมง 250 ฿"],["ห้องค้างคืน","คืนละ 500 ฿"]].map(([l,v]) => (
               <div key={l}>
                 <div className="text-[0.62rem] tracking-[0.2em] uppercase text-[#B8935A] mb-0.5">{l}</div>

@@ -19,29 +19,84 @@ const jost = Jost({
   display: "swap",
 });
 
+const BASE_URL = "https://claude-six-inky.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Banrimklong Resort — Luxury Heritage Retreat · Chachoengsao, Thailand",
-  description: "A riverside retreat along the ancient waterways of Chachoengsao — where unhurried grace meets the rhythm of the river.",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "บ้านริมคลอง รีสอร์ท — พักผ่อนริมคลอง ฉะเชิงเทรา",
+    template: "%s — บ้านริมคลอง รีสอร์ท",
+  },
+  description: "รีสอร์ทริมคลองบรรยากาศธรรมชาติ อ.แปลงยาว จ.ฉะเชิงเทรา ห้องพักรายคืน 500 ฿ · ห้องชั่วคราว 250 ฿/3 ชม. เช็คอิน 14:00 เช็คเอาท์ 12:00 โทร 080-994-4891",
+  keywords: [
+    "บ้านริมคลอง รีสอร์ท", "ที่พักฉะเชิงเทรา", "รีสอร์ทริมคลอง",
+    "ที่พักแปลงยาว", "โรงแรมฉะเชิงเทรา", "Banrimklong Resort",
+    "resort chachoengsao", "ที่พักราคาถูก", "ห้องพักรายคืน", "ห้องพักชั่วคราว",
+  ],
+  authors: [{ name: "บ้านริมคลอง รีสอร์ท" }],
+  creator: "บ้านริมคลอง รีสอร์ท",
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   openGraph: {
-    title: "Banrimklong Resort — Chachoengsao, Thailand",
-    description: "Where silence becomes luxury. A heritage retreat along the ancient waterways of Chachoengsao.",
-    url: "https://banrimklong.com",
-    siteName: "Banrimklong Resort",
-    images: [{ url: "/hero.jpg", width: 1200, height: 630, alt: "Banrimklong Resort" }],
+    title: "บ้านริมคลอง รีสอร์ท — พักผ่อนริมคลอง ฉะเชิงเทรา",
+    description: "รีสอร์ทริมคลองบรรยากาศธรรมชาติ อ.แปลงยาว จ.ฉะเชิงเทรา ห้องพักรายคืน 500 ฿ · ชั่วคราว 250 ฿",
+    url: BASE_URL,
+    siteName: "บ้านริมคลอง รีสอร์ท",
+    locale: "th_TH",
+    images: [{ url: "/resort.jpg", width: 1200, height: 630, alt: "บ้านริมคลอง รีสอร์ท ฉะเชิงเทรา" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Banrimklong Resort — Chachoengsao, Thailand",
-    description: "Where silence becomes luxury.",
-    images: ["/hero.jpg"],
+    title: "บ้านริมคลอง รีสอร์ท — ฉะเชิงเทรา",
+    description: "รีสอร์ทริมคลองบรรยากาศธรรมชาติ อ.แปลงยาว จ.ฉะเชิงเทรา",
+    images: ["/resort.jpg"],
   },
-  metadataBase: new URL("https://banrimklong.com"),
+};
+
+const hotelJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  name: "บ้านริมคลอง รีสอร์ท",
+  alternateName: "Banrimklong Resort",
+  description: "รีสอร์ทริมคลองบรรยากาศธรรมชาติ อำเภอแปลงยาว จังหวัดฉะเชิงเทรา",
+  url: BASE_URL,
+  telephone: "+66-80-994-4891",
+  email: "banrimklong_resort@hotmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "77/2-4 หมู่ที่ 7 ต.หัวสำโรง",
+    addressLocality: "อ.แปลงยาว",
+    addressRegion: "ฉะเชิงเทรา",
+    postalCode: "24190",
+    addressCountry: "TH",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 13.6,
+    longitude: 101.3,
+  },
+  priceRange: "฿฿",
+  image: `${BASE_URL}/resort.jpg`,
+  sameAs: [
+    "https://www.facebook.com/banrimklong",
+    "https://line.me/ti/p/~banrimklong772",
+  ],
+  checkinTime: "14:00",
+  checkoutTime: "12:00",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="th">
+      <head>
+        <meta name="theme-color" content="#B8935A" />
+        <meta name="color-scheme" content="light" />
+        <link rel="canonical" href={BASE_URL} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(hotelJsonLd) }}
+        />
+      </head>
       <body className={`${cormorant.variable} ${jost.variable} bg-[#F7F3ED] text-[#1E1812]`}>
         <Navbar />
         {children}
