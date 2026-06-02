@@ -12,11 +12,12 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     try {
       const res = await fetch("https://formspree.io/f/meedydrq", {
         method: "POST",
-        body: new FormData(e.currentTarget),
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(data),
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
       });
       if (res.ok) {
         setSent(true);
