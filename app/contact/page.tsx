@@ -54,7 +54,8 @@ export default function ContactPage() {
               { icon: "✦", label: "Address",    val: "77/2-4 หมู่ที่ 7 ต.หัวสำโรง อ.แปลงยาว\nChachoengsao, Thailand" },
               { icon: "✆", label: "Telephone",  val: "081-257-5225\nDaily 08:00 – 22:00 ICT" },
               { icon: "✉", label: "Email",      val: "banrimklong_resort@hotmail.com" },
-              { icon: "◈", label: "Social",     val: "Facebook: บ้านริมคลอง รีสอร์ท" },
+              { icon: "◈", label: "LINE",        val: "@banrimklong772" },
+              { icon: "◈", label: "Facebook",   val: "บ้านริมคลอง รีสอร์ท" },
             ].map(({ icon, label, val }) => (
               <div key={label} className="flex gap-5 py-5 border-b border-black/10 first:border-t">
                 <div className="w-11 h-11 border border-[rgba(184,147,90,0.25)] flex items-center justify-center text-[#B8935A] shrink-0">{icon}</div>
@@ -141,8 +142,9 @@ export default function ContactPage() {
               How to <em className="italic text-[#8B6830]">arrive</em>
             </h2>
             {[
-              ["ที่อยู่","77/2-4 หมู่ที่ 7 ต.หัวสำโรง อ.แปลงยาว จ.ฉะเชิงเทรา"],
+              ["ที่อยู่","77/2-4 หมู่ที่ 7 ต.หัวสำโรง อ.แปลงยาว จ.ฉะเชิงเทรา 24190"],
               ["โทรศัพท์","081-257-5225"],
+              ["LINE","@banrimklong772"],
               ["Facebook","บ้านริมคลอง รีสอร์ท"],
             ].map(([l,v]) => (
               <div key={l} className="mb-6">
@@ -150,15 +152,24 @@ export default function ContactPage() {
                 <div className="text-[#7A6E62] text-sm leading-relaxed">{v}</div>
               </div>
             ))}
-            <Link href="tel:0812575225" className="inline-block mt-2 px-6 py-2.5 border border-[rgba(237,224,200,0.2)] text-[#1E1812] text-xs tracking-[0.2em] uppercase hover:border-[#C9A35C] hover:text-[#B8935A] transition-colors">
-              โทรสอบถาม
-            </Link>
+            <div className="flex flex-wrap gap-3 mt-4">
+              <Link href="tel:0812575225" className="shimmer inline-block px-6 py-2.5 border border-[rgba(30,24,18,0.2)] text-[#1E1812] text-xs tracking-[0.2em] uppercase hover:border-[#B8935A] hover:text-[#B8935A] transition-colors">
+                โทรสอบถาม
+              </Link>
+              <Link href="https://line.me/ti/p/~banrimklong772" target="_blank" rel="noopener noreferrer"
+                className="shimmer inline-flex items-center gap-2 px-6 py-2.5 bg-[#00B900] text-white text-xs tracking-[0.2em] uppercase hover:bg-[#00A000] transition-colors">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white shrink-0">
+                  <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                </svg>
+                LINE
+              </Link>
+            </div>
           </div>
           <div className="min-h-[420px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247292.49!2d101.0775!3d13.6904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3102b4f5d78e63b7%3A0xb8bb2e5c6e1a72f0!2sChachoengsao%2C%20Thailand!5e0!3m2!1sen!2sth!4v1"
+              src="https://maps.google.com/maps?q=77/2-4+%E0%B8%AB%E0%B8%A1%E0%B8%B9%E0%B9%88+7+%E0%B8%95.%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B8%AA%E0%B8%B3%E0%B9%82%E0%B8%A3%E0%B8%87+%E0%B8%AD.%E0%B9%81%E0%B8%9B%E0%B8%A5%E0%B8%87%E0%B8%A2%E0%B8%B2%E0%B8%A7+%E0%B8%88.%E0%B8%89%E0%B8%B0%E0%B9%80%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%A3%E0%B8%B2+24190&output=embed&hl=th&z=15"
               className="w-full h-full min-h-[420px] border-0"
-              style={{ filter: "grayscale(1) invert(1) brightness(0.55) sepia(0.3) hue-rotate(180deg)" }}
+              style={{ filter: "grayscale(0.3) brightness(0.9)" }}
               allowFullScreen
               loading="lazy"
               title="Banrimklong Resort Location"

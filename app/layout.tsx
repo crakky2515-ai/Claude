@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import Navbar from "@/components/ui/navbar";
+import LineButton from "@/components/ui/line-button";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${cormorant.variable} ${jost.variable} bg-[#F7F3ED] text-[#1E1812]`}>
         <Navbar />
         {children}
+        <LineButton />
       </body>
     </html>
   );
