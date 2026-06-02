@@ -115,20 +115,33 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   }
 });
 
-// Form submission feedback
+// Form submission via Formspree
 const form = document.querySelector('.booking-form');
 if (form) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    const original = btn.textContent;
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = '✓ Request Sent';
-      btn.style.background = '#4a7c59';
-      btn.style.borderColor = '#4a7c59';
-    }, 1500);
+    try {
+      const res = await fetch('https://formspree.io/f/xbdbnanj', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        btn.textContent = '✓ Request Sent';
+        btn.style.background = '#4a7c59';
+        btn.style.borderColor = '#4a7c59';
+        form.reset();
+      } else {
+        btn.textContent = 'Failed — Please Try Again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Failed — Please Try Again';
+      btn.disabled = false;
+    }
   });
 }
 
