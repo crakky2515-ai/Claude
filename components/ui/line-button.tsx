@@ -10,7 +10,7 @@ export default function LineButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="ติดต่อผ่าน LINE"
-      className="shimmer fixed right-5 z-[10001] flex items-center gap-2.5 bg-[#00B900] text-white pl-3 pr-4 py-2.5 rounded-full shadow-xl hover:bg-[#00A000] hover:scale-105 transition-all duration-200"
+      className="fixed right-5 z-[10001] flex items-center gap-2.5 bg-[#00B900] text-white pl-3 pr-4 py-2.5 rounded-full shadow-xl hover:bg-[#00A000] hover:scale-105 transition-all duration-200"
       style={{ bottom: "calc(1.25rem + env(safe-area-inset-bottom, 0px))" }}
     >
       {/* LINE logo */}
