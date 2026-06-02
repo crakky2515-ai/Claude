@@ -55,7 +55,7 @@ export default function Home() {
             <div className="relative hover-frame about-float">
               <TiltImage src="/resort.jpg" alt="บ้านริมคลอง รีสอร์ท" className="w-full aspect-[4/5] object-cover" />
               <div className="md:hidden grid grid-cols-3 mt-4 border border-black/10">
-                {[["16","Suites"],["5★","Rating"],["3","Dining"]].map(([n,l]) => (
+                {[["10+","ปีที่ให้บริการ"],["2 ชม.","จาก กทม."],["500฿","เริ่มต้น/คืน"]].map(([n,l]) => (
                   <div key={l} className="text-center py-4 border-r border-black/10 last:border-r-0">
                     <div className="text-[#B8935A] text-xl" style={{ fontFamily: "var(--font-cormorant), serif" }}>{n}</div>
                     <div className="text-[0.6rem] tracking-widest uppercase text-[#7A6E62] mt-0.5">{l}</div>
