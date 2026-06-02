@@ -5,10 +5,29 @@ import Footer from "@/components/ui/footer";
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setTimeout(() => setSent(true), 800);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("https://formspree.io/f/xbdbnanj", {
+        method: "POST",
+        body: new FormData(e.currentTarget),
+        headers: { Accept: "application/json" },
+      });
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setError("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+      }
+    } catch {
+      setError("เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -86,46 +105,49 @@ export default function ContactPage() {
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                 <div className="grid grid-cols-2 gap-4">
-                  <Field label="First Name" id="fname" placeholder="Kannika" />
-                  <Field label="Last Name"  id="lname" placeholder="Siriwong" />
+                  <Field label="ชื่อ" id="fname" name="fname" placeholder="สมชาย" />
+                  <Field label="นามสกุล" id="lname" name="lname" placeholder="ใจดี" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Field label="Email"        id="email" type="email" placeholder="you@email.com" />
-                  <Field label="Phone / LINE" id="phone" placeholder="086-000-0000" inputMode="tel" />
+                  <Field label="Email" id="email" name="email" type="email" placeholder="you@email.com" />
+                  <Field label="เบอร์โทร / LINE" id="phone" name="phone" placeholder="081-000-0000" inputMode="tel" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Field label="Check-in"  id="checkin"  type="date" />
-                  <Field label="Check-out" id="checkout" type="date" />
+                  <Field label="เช็คอิน" id="checkin" name="checkin" type="date" />
+                  <Field label="เช็คเอาท์" id="checkout" name="checkout" type="date" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">Guests</label>
-                    <select className="w-full bg-transparent border border-[rgba(184,147,90,0.25)] px-4 py-3 text-[#1E1812] text-sm outline-none focus:border-[#C9A35C] transition-colors appearance-none">
-                      {["1 Guest","2 Guests","3 Guests","4 Guests","5+ Guests"].map(o => <option key={o} className="bg-white">{o}</option>)}
+                    <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">จำนวนผู้เข้าพัก</label>
+                    <select name="guests" className="w-full bg-transparent border border-[rgba(184,147,90,0.25)] px-4 py-3 text-[#1E1812] text-sm outline-none focus:border-[#C9A35C] transition-colors appearance-none">
+                      {["1 คน","2 คน","3 คน","4 คน","5+ คน"].map(o => <option key={o} className="bg-white">{o}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">Room Type</label>
-                    <select className="w-full bg-transparent border border-[rgba(184,147,90,0.25)] px-4 py-3 text-[#1E1812] text-sm outline-none focus:border-[#C9A35C] transition-colors appearance-none">
+                    <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">ประเภทห้อง</label>
+                    <select name="room_type" className="w-full bg-transparent border border-[rgba(184,147,90,0.25)] px-4 py-3 text-[#1E1812] text-sm outline-none focus:border-[#C9A35C] transition-colors appearance-none">
                       {["— กรุณาเลือก —","ห้องพักรายคืน (500 ฿/คืน)","ห้องพักชั่วคราว (250 ฿/3 ชั่วโมง)"].map(o => <option key={o} className="bg-white">{o}</option>)}
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">Special Request</label>
+                  <label className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">ข้อความเพิ่มเติม</label>
                   <textarea
+                    name="message"
                     rows={3}
-                    placeholder="Anniversary, dietary requirements, airport transfer..."
+                    placeholder="แจ้งความต้องการพิเศษ เช่น วันเกิด ฯลฯ"
                     className="w-full bg-transparent border border-[rgba(184,147,90,0.25)] px-4 py-3 text-[#1E1812] text-sm placeholder-[#9C8E7A]/50 outline-none focus:border-[#C9A35C] transition-colors resize-none"
                   />
                 </div>
+                {error && <p className="text-red-600 text-xs text-center">{error}</p>}
                 <button
                   type="submit"
-                  className="shimmer w-full py-4 bg-[#B8935A] text-white text-xs tracking-[0.2em] uppercase hover:bg-[#D4A96A] transition-colors"
+                  disabled={loading}
+                  className="shimmer w-full py-4 bg-[#B8935A] text-white text-xs tracking-[0.2em] uppercase hover:bg-[#D4A96A] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Reservation Request
+                  {loading ? "กำลังส่ง..." : "ส่งคำขอจอง"}
                 </button>
-                <p className="text-center text-xs text-[#7A6E62]">No payment required at this stage · Response within 2 hours</p>
+                <p className="text-center text-xs text-[#7A6E62]">ไม่มีการชำระเงิน ณ ขั้นตอนนี้ · ตอบกลับภายใน 2 ชั่วโมง</p>
               </form>
             )}
           </div>
@@ -183,12 +205,13 @@ export default function ContactPage() {
   );
 }
 
-function Field({ label, id, type = "text", placeholder = "", inputMode }: { label: string; id: string; type?: string; placeholder?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"] }) {
+function Field({ label, id, name, type = "text", placeholder = "", inputMode }: { label: string; id: string; name: string; type?: string; placeholder?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"] }) {
   return (
     <div>
       <label htmlFor={id} className="block text-[0.62rem] tracking-[0.18em] uppercase text-[#B8935A] mb-2">{label}</label>
       <input
         id={id}
+        name={name}
         type={type}
         placeholder={placeholder}
         inputMode={inputMode}
