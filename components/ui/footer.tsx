@@ -93,7 +93,7 @@ export default function Footer() {
               </li>
               <li>
                 <p className="text-[0.58rem] tracking-widest uppercase text-white/30 mb-0.5">Address</p>
-                <span>123 Rim Nam Rd, Pleangyao<br />Chachoengsao 24190</span>
+                <span>77/2-4 Huasamrong, Pleangyao<br />Chachoengsao 24190</span>
               </li>
               <li>
                 <p className="text-[0.58rem] tracking-widest uppercase text-white/30 mb-0.5">Hours</p>
