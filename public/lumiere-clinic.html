@@ -1224,7 +1224,29 @@
       .hero-actions { justify-content: center; flex-direction: column; align-items: center; gap: 12px; }
       .hero-actions .btn { width: 100%; max-width: 300px; justify-content: center; }
       .hero-stats { justify-content: space-around; flex-wrap: wrap; gap: 24px; }
-      .hero-visual { display: none; }
+      /* Show hero image on mobile — stacked above text */
+      .hero-visual {
+        display: flex;
+        justify-content: center;
+        order: -1; /* image above text */
+        padding-right: 0;
+        margin-bottom: 8px;
+      }
+      .hero-card-wrap {
+        width: 220px;
+        height: 280px;
+      }
+      .hero-bg-rect { display: none; }
+      .hero-badge {
+        left: -12px;
+        bottom: 16px;
+        min-width: 160px;
+        padding: 10px 14px;
+      }
+      .hero-badge-title { font-size: .78rem; }
+      .hero-badge-text { font-size: .68rem; }
+      /* hide decorative circles on mobile */
+      .hero-deco { display: none; }
 
       /* Services — horizontal scroll snap (feels native, not shrunk) */
       .services-grid {
