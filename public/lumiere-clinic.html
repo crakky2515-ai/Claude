@@ -2039,6 +2039,105 @@
   const style = document.createElement('style');
   style.textContent = '@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }';
   document.head.appendChild(style);
+
+  /* ─── CMS: apply saved content from admin panel ─────────── */
+  (() => {
+    const raw = localStorage.getItem('lumiere_cms');
+    if (!raw) return;
+    try {
+      const d = JSON.parse(raw);
+      const set = (sel, val, prop='textContent') => {
+        const el = document.querySelector(sel);
+        if (el && val !== undefined && val !== '') el[prop] = val;
+      };
+      const setAll = (sel, val) => document.querySelectorAll(sel).forEach(el => { if(val) el.textContent = val; });
+
+      // Branding — nav logo, footer logo, intro
+      if (d.g_name) {
+        document.querySelectorAll('.nav-logo, .footer-logo').forEach(el => {
+          el.innerHTML = `${d.g_name} <span>✦</span>`;
+        });
+      }
+      if (d.g_splash_name || d.g_splash_sub) {
+        set('.intro-name', d.g_splash_name ? `${d.g_splash_name}` : null);
+        if (d.g_splash_name) document.querySelector('.intro-name').innerHTML = d.g_splash_name.replace('✦','<span>✦</span>');
+        set('.intro-sub', d.g_splash_sub);
+      }
+
+      // Eyebrow labels
+      if (d.g_eyebrow) setAll('.hero-eyebrow .label', d.g_eyebrow);
+
+      // Hero headline
+      if (d.h_line1 || d.h_line2 || d.h_line3) {
+        const title = document.querySelector('.hero-title');
+        if (title) title.innerHTML = `${d.h_line1||''}<br /><em>${d.h_line2||''}</em><br />${d.h_line3||''}`;
+      }
+      set('.hero-sub', d.h_sub);
+
+      // Stats
+      const statNums = document.querySelectorAll('.stat-num');
+      const statLabels = document.querySelectorAll('.stat-label');
+      if (statNums[0] && d.h_stat1_num) statNums[0].textContent = d.h_stat1_num;
+      if (statNums[1] && d.h_stat2_num) statNums[1].textContent = d.h_stat2_num;
+      if (statNums[2] && d.h_stat3_num) statNums[2].textContent = d.h_stat3_num;
+      if (statLabels[0] && d.h_stat1_label) statLabels[0].textContent = d.h_stat1_label;
+      if (statLabels[1] && d.h_stat2_label) statLabels[1].textContent = d.h_stat2_label;
+      if (statLabels[2] && d.h_stat3_label) statLabels[2].textContent = d.h_stat3_label;
+
+      // Badge
+      set('.hero-badge-title', d.h_badge_title);
+      set('.hero-badge-text', d.h_badge_text);
+
+      // Services
+      if (d.services) {
+        const cards = document.querySelectorAll('.service-card');
+        d.services.forEach((s, i) => {
+          if (!cards[i]) return;
+          const tag = cards[i].querySelector('.service-tag');
+          const name = cards[i].querySelector('.service-name');
+          const desc = cards[i].querySelector('.service-desc');
+          if (tag && s.tag) tag.textContent = s.tag;
+          if (name && s.name) name.innerHTML = `${s.name}<br />${s.name_th||''}`;
+          if (desc && s.desc) desc.textContent = s.desc;
+        });
+      }
+
+      // Promotions
+      if (d.promos) {
+        const cards = document.querySelectorAll('.promo-card');
+        d.promos.forEach((p, i) => {
+          if (!cards[i]) return;
+          const badge = cards[i].querySelector('.promo-badge');
+          const title = cards[i].querySelector('.promo-title');
+          const desc = cards[i].querySelector('.promo-desc');
+          const price = cards[i].querySelector('.promo-price');
+          const orig = cards[i].querySelector('.promo-orig');
+          if (badge && p.badge) badge.innerHTML = badge.innerHTML.replace(/(?<=<\/svg>).*/, ` ${p.badge}`);
+          if (title && p.title) title.innerHTML = `${p.title}<br />${p.subtitle||''}`;
+          if (desc && p.desc) desc.textContent = p.desc;
+          if (price && p.price) price.textContent = p.price;
+          if (orig && p.orig) orig.textContent = `฿${p.orig}`;
+        });
+      }
+
+      // Contact
+      const infoVals = document.querySelectorAll('.info-val');
+      if (infoVals[0] && d.c_address) infoVals[0].innerHTML = d.c_address.replace(/\n/,'<br/>');
+      if (infoVals[1] && d.c_phone) infoVals[1].innerHTML = `${d.c_phone}<br/>${d.c_email||''}`;
+      if (infoVals[2] && d.c_hours_wd) infoVals[2].innerHTML = `จันทร์ – ศุกร์: ${d.c_hours_wd}<br/>เสาร์ – อาทิตย์: ${d.c_hours_we||''}`;
+      if (d.c_map_url) {
+        const mapLink = document.querySelector('.map-placeholder a');
+        if (mapLink) mapLink.href = d.c_map_url;
+      }
+
+      // Footer contact
+      const footerItems = document.querySelectorAll('.footer-contact-item');
+      if (footerItems[0] && d.c_address) footerItems[0].lastChild.textContent = d.c_address.replace('\n',' ');
+      if (footerItems[1] && d.c_phone) footerItems[1].lastChild.textContent = d.c_phone;
+      if (footerItems[2] && d.c_email) footerItems[2].lastChild.textContent = d.c_email;
+
+    } catch(e) { console.warn('CMS parse error', e); }
+  })();
 </script>
 </body>
 </html>
