@@ -747,8 +747,22 @@ window.addEventListener('scroll', () => navbar.classList.toggle('stuck', window.
 /* ── Reveal on scroll ───────────────────────────────────── */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); obs.unobserve(e.target); } });
-}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}, {threshold:.08, rootMargin:'0px 0px 0px 0px'});
+
+document.querySelectorAll('.reveal').forEach(el => {
+  const rect = el.getBoundingClientRect();
+  // Reveal immediately if already in/above viewport on load
+  if (rect.top < window.innerHeight + 10) {
+    setTimeout(() => el.classList.add('up'), 80);
+  } else {
+    obs.observe(el);
+  }
+});
+
+// Hard fallback: reveal everything after 1.2s no matter what
+setTimeout(() => {
+  document.querySelectorAll('.reveal:not(.up)').forEach(el => el.classList.add('up'));
+}, 1200);
 </script>
 </body>
 </html>
