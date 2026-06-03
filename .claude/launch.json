@@ -6,6 +6,21 @@
       "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
       "runtimeArgs": ["node_modules/next/dist/bin/next", "dev", "--port", "3001"],
       "port": 3001
+    },
+    {
+      "name": "velvet-roast",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\npx.cmd",
+      "runtimeArgs": ["serve", "D:\\Claude Coffee website"],
+      "port": 3456,
+      "autoPort": true
+    }
+  ,
+    {
+      "name": "lumiere-clinic",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "public", "--listen", "5100"],
+      "port": 5100,
+      "cwd": "D:\\Claude Website"
     }
   ]
 }
