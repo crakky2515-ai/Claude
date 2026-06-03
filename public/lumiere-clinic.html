@@ -1284,6 +1284,29 @@
       .footer-brand { grid-column: span 1; }
       .hero-stats .stat-num { font-size: 2rem; }
       .service-card { flex: 0 0 85vw; }
+
+      /* Fix oversized hero on small phones */
+      .hero-title { font-size: 2.2rem; line-height: 1.15; }
+      .hero-title em { font-size: 2.2rem; }
+
+      /* Fix eyebrow label wrapping */
+      .label { letter-spacing: .1em; font-size: .68rem; }
+      .hero-eyebrow .label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+
+      /* Subtitle centered but not too wide */
+      .hero-sub { font-size: .92rem; text-align: center; max-width: 300px; }
+
+      /* Stat numbers smaller */
+      .hero-stats { gap: 16px; }
+      .stat-num { font-size: 1.8rem; }
+      .stat-label { font-size: .72rem; }
+
+      /* Buttons full-width */
+      .hero-actions .btn { font-size: .88rem; padding: 13px 24px; }
+
+      /* Section padding tighter */
+      .section { padding: 64px 0; }
+      .heading-lg { font-size: 1.8rem; }
     }
   </style>
 </head>
