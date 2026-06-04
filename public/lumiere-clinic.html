@@ -1213,10 +1213,15 @@
 
       /* Hero — centered, full-bleed feel */
       #hero {
-        grid-template-columns: 1fr;
         padding-top: calc(var(--nav-h) + 48px);
         padding-bottom: 56px;
         text-align: center;
+        min-height: auto;
+      }
+      /* Fix: grid is on .container, not #hero */
+      #hero .container {
+        grid-template-columns: 1fr;
+        gap: 24px;
         min-height: auto;
       }
       .hero-eyebrow { justify-content: center; }
