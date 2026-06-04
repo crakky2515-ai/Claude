@@ -150,105 +150,99 @@
     .mobile-menu a:hover { color: var(--gold); }
 
     /* ═══════════════════════════════════════════
-       HERO
+       HERO — 2-column grid
     ═══════════════════════════════════════════ */
     #hero {
       min-height: 100svh; position: relative; overflow: hidden;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 52px 80px;
-    }
-    /* Hero profile photo */
-    .hero-photo-wrap {
-      position: absolute;
-      right: 0; bottom: 0;
-      width: clamp(320px, 42vw, 580px);
-      height: clamp(420px, 80vh, 720px);
-      z-index: 2; pointer-events: none;
-    }
-    .hero-photo-wrap::before {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
-      background: linear-gradient(to top, var(--bg) 0%, transparent 100%);
-      z-index: 3;
-    }
-    .hero-photo-wrap::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--bg) 0%, transparent 45%);
-      z-index: 3;
-    }
-    .hero-photo {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-      border-radius: 0; display: block;
-      filter: brightness(.88) contrast(1.05);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
     }
     .hero-bg {
-      position: absolute; inset: 0; pointer-events: none;
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 75% 35%, rgba(200,150,90,.055) 0%, transparent 65%),
-        radial-gradient(ellipse 40% 70% at 15% 75%, rgba(120,70,160,.035) 0%, transparent 55%),
-        radial-gradient(ellipse 90% 40% at 50% 0%, rgba(200,150,90,.02) 0%, transparent 50%);
+        radial-gradient(ellipse 60% 60% at 20% 60%, rgba(200,150,90,.04) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 70% at 80% 40%, rgba(200,150,90,.03) 0%, transparent 55%);
     }
     .hero-grid-line {
-      position: absolute; background: var(--border);
-      pointer-events: none; opacity: .5;
+      position: absolute; background: var(--border); pointer-events: none;
     }
-    .hgl-v1 { width: 1px; top: 0; bottom: 0; left: 52px; }
-    .hgl-v2 { width: 1px; top: 0; bottom: 0; right: 52px; opacity: .25; }
-    .hgl-h  { height: 1px; left: 0; right: 0; bottom: 80px; }
+    .hgl-v1 { width: 1px; top: 0; bottom: 0; left: 52px; opacity: .4; }
+    .hgl-h  { height: 1px; left: 0; right: 0; bottom: 0; opacity: .3; }
 
+    /* LEFT — text column */
+    .hero-left {
+      padding: 140px 52px 80px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; z-index: 2;
+    }
     .hero-eyebrow {
       font-family: 'Syne', sans-serif; font-size: .7rem; font-weight: 600;
       letter-spacing: .28em; text-transform: uppercase; color: var(--gold);
-      display: flex; align-items: center; gap: 16px; margin-bottom: 30px;
+      display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
     }
-    .hero-eyebrow::before { content:''; display:block; width:40px; height:1px; background:var(--gold); }
-    .hero-eyebrow-th { font-family: var(--thai-font); font-size: .68rem; font-weight: 300; color: var(--muted2); margin-left: 4px; letter-spacing: .05em; text-transform: none; }
-
+    .hero-eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--gold); flex-shrink:0; }
+    .hero-eyebrow-th { font-family: var(--thai-font); font-size: .66rem; font-weight: 300; color: var(--muted); letter-spacing: .04em; text-transform: none; }
     .hero-name {
       font-family: 'Cormorant', serif;
-      font-size: clamp(4rem, 10vw, 10rem);
-      font-weight: 200; line-height: .92;
+      font-size: clamp(3.8rem, 7.5vw, 9rem);
+      font-weight: 200; line-height: .9;
       color: var(--white); letter-spacing: -.025em;
-      margin-bottom: 52px;
+      margin-bottom: 36px;
     }
     .hero-name em { font-style: italic; color: var(--gold); }
-
-    .hero-bottom {
-      display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap;
-    }
     .hero-desc {
-      max-width: 440px; font-size: .93rem; color: var(--muted2); line-height: 1.8;
+      font-size: .9rem; color: var(--muted2); line-height: 1.82;
+      max-width: 400px; margin-bottom: 48px;
     }
-    .hero-desc .th { font-size: .85rem; margin-top: 6px; }
-    .hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; }
-    .hero-badge {
-      display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
-      font-family: 'Syne', sans-serif; font-size: .68rem; letter-spacing: .14em;
+    .hero-desc .th { font-family: var(--thai-font); font-size: .83rem; color: var(--muted); margin-top: 6px; display: block; }
+    .hero-meta {
+      display: flex; align-items: center; gap: 24px;
+      padding-top: 32px; border-top: 1px solid var(--border);
+    }
+    .hero-avail {
+      font-family: 'Syne', sans-serif; font-size: .68rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .avail-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+    .hero-loc {
+      font-family: 'Syne', sans-serif; font-size: .68rem; letter-spacing: .1em;
       text-transform: uppercase; color: var(--muted);
     }
     .hero-scroll {
-      display: flex; align-items: center; gap: 12px;
-      font-family: 'Syne', sans-serif; font-size: .66rem; letter-spacing: .2em;
+      margin-left: auto;
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Syne', sans-serif; font-size: .64rem; letter-spacing: .18em;
       text-transform: uppercase; color: var(--muted);
     }
-    .scroll-bar { width: 44px; height: 1px; background: rgba(255,255,255,.1); position: relative; overflow: hidden; }
+    .scroll-bar { width: 36px; height: 1px; background: rgba(255,255,255,.1); position: relative; overflow: hidden; }
     .scroll-bar::after {
       content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
       background: var(--gold); animation: bar-slide 2.2s ease-in-out infinite;
     }
     @keyframes bar-slide { 0%{left:-100%} 100%{left:100%} }
 
-    /* floating orbs */
-    .orb {
-      position: absolute; border-radius: 50%; pointer-events: none;
-      filter: blur(80px); opacity: .4;
-      animation: orb-drift 14s ease-in-out infinite alternate;
+    /* RIGHT — photo column */
+    .hero-photo-wrap {
+      position: relative; height: 100svh; overflow: hidden;
     }
-    .orb1 { width: 500px; height: 500px; background: rgba(200,150,90,.04); right: -100px; top: -100px; animation-duration: 18s; }
-    .orb2 { width: 300px; height: 300px; background: rgba(120,70,180,.03); left: 10%; bottom: 10%; animation-duration: 22s; animation-delay: -7s; }
-    @keyframes orb-drift { 0%{transform:translate(0,0)} 100%{transform:translate(30px,20px)} }
+    .hero-photo-wrap::before {
+      content: ''; position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(to right, var(--bg) 0%, rgba(10,9,12,.3) 30%, transparent 60%),
+        linear-gradient(to top, var(--bg) 0%, transparent 25%);
+    }
+    .hero-photo {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      filter: brightness(.82) contrast(1.08) saturate(.9);
+    }
+
 
     /* ═══════════════════════════════════════════
        ABOUT SECTION
@@ -582,12 +576,17 @@
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: block; }
 
-      #hero { padding: 0 24px 64px; }
-      .hgl-v1 { left: 24px; } .hgl-v2 { right: 24px; }
-      .hero-name { font-size: clamp(3.2rem, 15vw, 6rem); margin-bottom: 36px; }
-      .hero-bottom { flex-direction: column; gap: 28px; }
-      .hero-right { align-items: flex-start; }
-      .hero-photo-wrap { display: none; }
+      /* Hero — stack on mobile */
+      #hero { grid-template-columns: 1fr; min-height: 100svh; }
+      .hero-left { padding: 120px 24px 60px; justify-content: flex-end; }
+      .hgl-v1 { left: 24px; }
+      .hero-name { font-size: clamp(3.4rem, 14vw, 6rem); margin-bottom: 28px; }
+      .hero-meta { flex-wrap: wrap; gap: 16px; }
+      .hero-scroll { margin-left: 0; }
+      /* photo hidden on mobile — show as background instead */
+      .hero-photo-wrap {
+        display: none;
+      }
 
       /* About */
       #about { padding: 80px 24px; }
@@ -657,44 +656,43 @@
 
 <!-- ── Hero ──────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="hero-grid-line hgl-v1"></div>
-  <div class="hero-grid-line hgl-v2"></div>
-  <div class="hero-grid-line hgl-h"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid-line hgl-v1" aria-hidden="true"></div>
+  <div class="hero-grid-line hgl-h" aria-hidden="true"></div>
 
-  <!-- Hero profile photo (desktop) -->
-  <div class="hero-photo-wrap" aria-hidden="true">
-    <img class="hero-photo" src="/profile1.jpg" alt="Tassapol Raksakit" />
-  </div>
+  <!-- LEFT: Text -->
+  <div class="hero-left">
+    <div class="hero-eyebrow reveal">
+      Web Designer &amp; Developer
+      <span class="hero-eyebrow-th">นักออกแบบและพัฒนาเว็บไซต์</span>
+    </div>
 
-  <div class="hero-eyebrow reveal">
-    Web Designer &amp; Developer
-    <span class="hero-eyebrow-th">· นักออกแบบและพัฒนาเว็บไซต์</span>
-  </div>
+    <h1 class="hero-name reveal reveal-d1">
+      Tassapol<br /><em>Raksakit</em>
+    </h1>
 
-  <h1 class="hero-name reveal reveal-d1">
-    Tassapol<br /><em>Raksakit</em>
-  </h1>
-
-  <div class="hero-bottom reveal reveal-d2">
-    <div class="hero-desc">
+    <div class="hero-desc reveal reveal-d2">
       Crafting premium digital experiences for hospitality, beauty,
       F&amp;B, and lifestyle brands — from concept to live deployment.
       <span class="th">รับออกแบบและพัฒนาเว็บไซต์ระดับพรีเมียม ตั้งแต่คอนเซปต์จนถึง deploy จริง</span>
     </div>
-    <div class="hero-right">
-      <div class="hero-badge">
-        <span>Bangkok, Thailand</span>
-        <span>กรุงเทพมหานคร</span>
-        <span style="color:var(--gold);margin-top:4px;">● รับงานอยู่ / Available</span>
+
+    <div class="hero-meta reveal reveal-d3">
+      <div class="hero-avail">
+        <div class="avail-dot" aria-hidden="true"></div>
+        รับงานอยู่ / Available
       </div>
+      <div class="hero-loc">Bangkok, TH</div>
       <div class="hero-scroll">
-        <div class="scroll-bar"></div>
+        <div class="scroll-bar" aria-hidden="true"></div>
         Scroll
       </div>
     </div>
+  </div>
+
+  <!-- RIGHT: Photo -->
+  <div class="hero-photo-wrap reveal reveal-d2" aria-hidden="true">
+    <img class="hero-photo" src="/profile1.jpg" alt="" />
   </div>
 </section>
 
