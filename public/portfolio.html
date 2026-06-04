@@ -255,47 +255,13 @@
     ═══════════════════════════════════════════ */
     #about {
       padding: 120px 52px;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
       background: var(--bg2);
       border-top: 1px solid var(--border);
     }
-    .about-img-wrap {
-      position: relative; height: 580px;
+    .about-content {
+      max-width: 760px;
+      position: relative;
     }
-    .about-img-main {
-      width: 80%; height: 100%;
-      object-fit: cover; object-position: center top;
-      border-radius: 2px;
-      filter: brightness(.9) contrast(1.05);
-      display: block;
-    }
-    .about-img-deco {
-      position: absolute;
-      width: 55%; height: 52%;
-      bottom: -24px; right: 0;
-      border: 1px solid var(--border2);
-      border-radius: 2px;
-      z-index: 0;
-    }
-    .about-img-tag {
-      position: absolute;
-      bottom: 28px; left: 0;
-      background: rgba(10,9,12,.92);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border2);
-      padding: 14px 20px;
-      z-index: 2;
-    }
-    .about-img-tag-name {
-      font-family: 'Syne', sans-serif; font-size: .72rem; font-weight: 700;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--gold);
-    }
-    .about-img-tag-role {
-      font-family: var(--thai-font); font-size: .76rem; font-weight: 300;
-      color: var(--muted2); margin-top: 3px;
-    }
-    .about-content { position: relative; }
     .about-quote {
       font-family: 'Cormorant', serif;
       font-size: clamp(1.5rem, 2.8vw, 2.4rem);
@@ -624,10 +590,7 @@
       .hero-photo-wrap { display: none; }
 
       /* About */
-      #about { grid-template-columns: 1fr; gap: 40px; padding: 80px 24px; }
-      .about-img-wrap { height: 360px; }
-      .about-img-main { width: 100%; }
-      .about-img-deco { display: none; }
+      #about { padding: 80px 24px; }
       .about-facts { grid-template-columns: 1fr 1fr; }
 
       .sec { padding: 80px 24px; }
@@ -742,17 +705,7 @@
 
 <!-- ── About ──────────────────────────────────────────── -->
 <section id="about">
-  <!-- Image column -->
-  <div class="about-img-wrap reveal-left reveal">
-    <img class="about-img-main" src="/profile2.jpg" alt="Tassapol Raksakit — Web Designer Bangkok" loading="lazy" />
-    <div class="about-img-deco" aria-hidden="true"></div>
-    <div class="about-img-tag">
-      <div class="about-img-tag-name">Tassapol Raksakit</div>
-      <div class="about-img-tag-role">Web Designer &amp; Developer · Bangkok</div>
-    </div>
-  </div>
-
-  <!-- Content column -->
+  <!-- Content only -->
   <div class="about-content">
     <div class="sec-label reveal">About Me · เกี่ยวกับผม</div>
 
