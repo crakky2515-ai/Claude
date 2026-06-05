@@ -8,6 +8,12 @@
   <meta property="og:title" content="Tassapol Raksakit — Web Designer & Developer" />
   <meta property="og:description" content="รับทำเว็บไซต์ระดับพรีเมียม · Premium web design Bangkok" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tassapol.dev/profile1.jpg" />
+  <meta property="og:url" content="https://tassapol.dev/portfolio.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tassapol Raksakit — Web Designer & Developer" />
+  <meta name="twitter:description" content="รับทำเว็บไซต์ระดับพรีเมียม · Premium web design Bangkok" />
+  <meta name="twitter:image" content="https://tassapol.dev/profile1.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,7 +35,7 @@
       --gold-lt:   #E0B878;
       --gold-dk:   #9A6E38;
       --text:      #EDE8E0;
-      --muted:     #66606E;
+      --muted:     #857D8C;
       --muted2:    #8A8294;
       --white:     #F7F3EE;
       --thai-font: 'Noto Sans Thai', sans-serif;
@@ -82,6 +88,16 @@
     .reveal-d3 { transition-delay: .3s; } .reveal-d4 { transition-delay: .4s; }
     .reveal-d5 { transition-delay: .5s; } .reveal-d6 { transition-delay: .6s; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+    /* ═══════════════════════════════════════════
+       FOCUS VISIBLE — keyboard navigation
+    ═══════════════════════════════════════════ */
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
 
     /* ═══════════════════════════════════════════
        THAI LABEL HELPER
@@ -715,7 +731,7 @@
   </div>
 
   <!-- RIGHT: Photo -->
-  <div class="hero-photo-wrap reveal reveal-d2" aria-hidden="true">
+  <div class="hero-photo-wrap" aria-hidden="true">
     <img class="hero-photo" src="/profile1.jpg" alt="" />
   </div>
 </section>
@@ -827,7 +843,7 @@
         <span class="proj-tag">ScrollTrigger</span>
       </div>
     </div>
-    <div class="proj-img"><img src="/hero.jpg" alt="Velvet Roast Coffee website" loading="lazy" /></div>
+    <div class="proj-img"><img src="/Image/hero.jpg" alt="Velvet Roast Coffee website" loading="lazy" /></div>
     <div class="proj-actions">
       <a href="https://velvet-roast-lemon.vercel.app" target="_blank" rel="noopener" class="btn-demo">
         Live Demo
@@ -883,7 +899,7 @@
         <span class="proj-tag">Responsive</span>
       </div>
     </div>
-    <div class="proj-img"><img src="/Image/hero.jpg" alt="Vertex Fitness website" loading="lazy" /></div>
+    <div class="proj-img"><img src="/fitness-hero.jpg" alt="Vertex Fitness website" loading="lazy" /></div>
     <div class="proj-actions">
       <a href="https://website-fitness-beta.vercel.app" target="_blank" rel="noopener" class="btn-demo">
         Live Demo
