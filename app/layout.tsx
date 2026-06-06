@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   authors: [{ name: "บ้านริมคลอง รีสอร์ท" }],
   creator: "บ้านริมคลอง รีสอร์ท",
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  verification: { google: "lhclGLWmIsyfXHgz0gVMo0phR28bDte6mRGyAWlrsy4" },
   openGraph: {
     title: "บ้านริมคลอง รีสอร์ท — พักผ่อนริมคลอง ฉะเชิงเทรา",
     description: "รีสอร์ทริมคลองบรรยากาศธรรมชาติ อ.แปลงยาว จ.ฉะเชิงเทรา ห้องพักรายคืน 500 ฿ · ชั่วคราว 250 ฿",
