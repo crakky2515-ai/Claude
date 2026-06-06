@@ -72,8 +72,8 @@ const hotelJsonLd = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 13.6,
-    longitude: 101.3,
+    latitude: 13.6512,
+    longitude: 101.2834,
   },
   priceRange: "฿฿",
   image: `${BASE_URL}/resort.jpg`,

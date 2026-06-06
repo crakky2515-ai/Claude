@@ -5,7 +5,14 @@ import Footer from "@/components/ui/footer";
 import { MagneticLink } from "@/components/ui/magnetic-link";
 
 export const metadata: Metadata = {
-  title: "Rooms & Suites — Banrimklong Resort",
+  title: "ห้องพัก & ราคา",
+  description:
+    "ห้องพักบ้านริมคลอง รีสอร์ท ริมคลองธรรมชาติ อ.แปลงยาว ฉะเชิงเทรา — ห้องพักรายคืน 500 ฿ เช็คอิน 14:00 เช็คเอาท์ 12:00 · ห้องชั่วคราว 250 ฿/3 ชั่วโมง",
+  openGraph: {
+    title: "ห้องพัก & ราคา — บ้านริมคลอง รีสอร์ท",
+    description: "ห้องพักรายคืน 500 ฿ · ห้องชั่วคราว 250 ฿/3 ชม. — ริมคลอง อ.แปลงยาว ฉะเชิงเทรา",
+    images: [{ url: "/room1.jpg", width: 1200, height: 630, alt: "ห้องพักบ้านริมคลอง รีสอร์ท" }],
+  },
 };
 
 const rooms = [
