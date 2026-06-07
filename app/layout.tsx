@@ -54,6 +54,14 @@ export const metadata: Metadata = {
   },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Banrimklong Resort",
+  alternateName: "บ้านริมคลอง รีสอร์ท",
+  url: BASE_URL,
+};
+
 const hotelJsonLd = {
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
@@ -93,6 +101,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#B8935A" />
         <meta name="color-scheme" content="light" />
         <link rel="canonical" href={BASE_URL} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(hotelJsonLd) }}
