@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Mockups — Tassapol Raksakit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300&family=Syne:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A090C;
+      --gold: #C8965A;
+      --text: #EDE8E0;
+      --muted: #857D8C;
+    }
+    body {
+      background: var(--bg);
+      font-family: 'Syne', sans-serif;
+      color: var(--text);
+      padding: 60px 40px;
+    }
+
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .page-label {
+      font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .page-title {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300; color: var(--text);
+    }
+    .page-title em { font-style: italic; color: var(--gold); }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .grid .card:first-child {
+      grid-column: 1 / -1;
+    }
+
+    /* Card */
+    .card {
+      background: #131118;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 32px 80px rgba(0,0,0,.6);
+    }
+
+    /* Browser mockup */
+    .browser {
+      background: #1C1A22;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dots { display: flex; gap: 6px; }
+    .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28C840; }
+    .address-bar {
+      flex: 1;
+      background: rgba(255,255,255,.06);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .03em;
+    }
+
+    /* Screenshot */
+    .screenshot {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .screenshot-tall {
+      aspect-ratio: 4/3;
+    }
+
+    /* Card info */
+    .card-info {
+      padding: 28px 32px 32px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .card-cat {
+      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .card-name {
+      font-family: 'Cormorant', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300; color: var(--text);
+      line-height: 1.15;
+    }
+    .card-desc {
+      font-size: .78rem; color: var(--muted);
+      margin-top: 8px; line-height: 1.7;
+      max-width: 460px;
+    }
+    .card-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 14px;
+    }
+    .tag {
+      font-size: .58rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 40px;
+      border: 1px solid rgba(200,150,90,.25);
+      color: var(--muted);
+    }
+    .card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 20px; border-radius: 40px;
+      border: 1px solid rgba(200,150,90,.35);
+      font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; white-space: nowrap;
+      transition: .3s;
+      flex-shrink: 0;
+    }
+    .card-link:hover { background: var(--gold); color: #0A090C; }
+
+    /* Overlay shimmer on screenshot */
+    .ss-wrap { position: relative; overflow: hidden; }
+    .ss-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(19,17,24,.9) 100%);
+      pointer-events: none;
+    }
+
+    /* Print hint */
+    .hint {
+      text-align: center;
+      margin-top: 64px;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+    .hint span { color: var(--gold); }
+
+    @media print {
+      body { background: white; padding: 20px; }
+      .card { break-inside: avoid; page-break-inside: avoid; }
+    }
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: 1fr; }
+      .grid .card:first-child { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-label">Portfolio · ผลงาน</div>
+  <h1 class="page-title">Selected <em>Works</em></h1>
+</div>
+
+<div class="grid">
+
+  <!-- 01 Banrimklong Resort -->
+  <div class="card">
+    <div class="browser">
+      <div class="dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="address-bar">claude-six-inky.vercel.app</div>
+    </div>
+    <div class="ss-wrap">
+      <img class="screenshot screenshot-tall" src="/resort.jpg" alt="บ้านริมคลอง รีสอร์ท" />
+    </div>
+    <div class="card-info">
+      <div>
+        <div class="card-cat">Hospitality · รีสอร์ท</div>
+        <div class="card-name">บ้านริมคลอง<br/>รีสอร์ท</div>
+        <div class="card-desc">เว็บไซต์รีสอร์ทริมคลองระดับพรีเมียม ระบบจองห้องออนไลน์ SEO ครบ และ Google Search Console</div>
+        <div class="card-tags">
+          <span class="tag">Next.js</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Tailwind</span>
+          <span class="tag">GSAP</span>
+          <span class="tag">SEO</span>
+        </div>
+      </div>
+      <a href="https://claude-six-inky.vercel.app" target="_blank" class="card-link">
+        Live ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- 02 Velvet Roast Coffee -->
+  <div class="card">
+    <div class="browser">
+      <div class="dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="address-bar">velvet-roast-lemon.vercel.app</div>
+    </div>
+    <div class="ss-wrap">
+      <img class="screenshot" src="/Image/hero.jpg" alt="Velvet Roast Coffee" />
+    </div>
+    <div class="card-info">
+      <div>
+        <div class="card-cat">F&B · ร้านกาแฟ</div>
+        <div class="card-name">Velvet Roast<br/>Coffee</div>
+        <div class="card-desc">เว็บไซต์ร้านกาแฟ artisan dark luxury พร้อม GSAP scroll animations และระบบจองโต๊ะ</div>
+        <div class="card-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">GSAP</span>
+          <span class="tag">ScrollTrigger</span>
+        </div>
+      </div>
+      <a href="https://velvet-roast-lemon.vercel.app" target="_blank" class="card-link">
+        Live ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- 03 Vertex Fitness -->
+  <div class="card">
+    <div class="browser">
+      <div class="dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="address-bar">website-fitness-beta.vercel.app</div>
+    </div>
+    <div class="ss-wrap">
+      <img class="screenshot" src="/fitness-hero.jpg" alt="Vertex Fitness" />
+    </div>
+    <div class="card-info">
+      <div>
+        <div class="card-cat">Fitness & Wellness</div>
+        <div class="card-name">Vertex<br/>Fitness</div>
+        <div class="card-desc">เว็บไซต์ฟิตเนสพลังสูง editorial typography ตารางคลาส โปรไฟล์เทรนเนอร์ Responsive ทุกขนาดจอ</div>
+        <div class="card-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">GSAP</span>
+          <span class="tag">Responsive</span>
+        </div>
+      </div>
+      <a href="https://website-fitness-beta.vercel.app" target="_blank" class="card-link">
+        Live ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- 04 Lumière Aesthetic Clinic -->
+  <div class="card">
+    <div class="browser">
+      <div class="dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="address-bar">lumiere-clinic.vercel.app</div>
+    </div>
+    <div class="ss-wrap">
+      <img class="screenshot" src="/clinic-img/adc148b8274dbe6874712d66ac8dde21.jpg" alt="Lumière Clinic" />
+    </div>
+    <div class="card-info">
+      <div>
+        <div class="card-cat">Beauty · คลินิกความงาม</div>
+        <div class="card-name">Lumière<br/>Aesthetic Clinic</div>
+        <div class="card-desc">เว็บไซต์คลินิกความงามระดับ luxury บรรยากาศ soft gold พร้อมระบบนัดหมายออนไลน์</div>
+        <div class="card-tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Animations</span>
+        </div>
+      </div>
+      <a href="#" class="card-link">Live ↗</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="hint">
+  กด <span>Ctrl + P</span> เพื่อ Print / Save as PDF · หรือ Screenshot แต่ละ card ได้เลย
+</div>
+
+</body>
+</html>
